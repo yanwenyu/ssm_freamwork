@@ -1,19 +1,19 @@
 package com.duyi.hrb.domain;
 
-import java.util.Objects;
 
 public class User {
     private int id;
     private String username;
-    private String userpwd;
+    private String password;
+    private String tel;
 
     public User() {
     }
 
-    public User(int id, String username, String userpwd) {
-        this.id = id;
+    public User(String username, String password, String tel) {
         this.username = username;
-        this.userpwd = userpwd;
+        this.password = password;
+        this.tel = tel;
     }
 
     public int getId() {
@@ -32,26 +32,20 @@ public class User {
         this.username = username;
     }
 
-    public String getUserpwd() {
-        return userpwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserpwd(String userpwd) {
-        this.userpwd = userpwd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id &&
-                Objects.equals(username, user.username);
+    public String getTel() {
+        return tel;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username);
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     @Override
@@ -59,7 +53,8 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", userpwd='" + userpwd + '\'' +
+                ", password='" + password + '\'' +
+                ", tel='" + tel + '\'' +
                 '}';
     }
 }

@@ -10,16 +10,16 @@
     <context:component-scan base-package="com.duyi.hrb"/>
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
-
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:config/database.properties"/>
     <bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <!--驱动类名 -->
-        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="driverClass" value="${db.driver}" />
         <!-- url -->
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/user_date?characterEncoding=utf-8" />
+        <property name="jdbcUrl" value="${db.jdbcUrl}" />
         <!-- 用户名 -->
-        <property name="user" value="root" />
+        <property name="user" value="${db.user}" />
         <!-- 密码 -->
-        <property name="password" value="sasa" />
+        <property name="password" value="${db.password}" />
         <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数  -->
         <property name="acquireIncrement" value="5"></property>
         <!-- 初始连接池大小 -->
@@ -34,9 +34,13 @@
         <!-- 数据源 -->
         <property name="dataSource" ref="datasource"></property>
         <!-- sql映射文件路径 -->
-        <property name="mapperLocations" value="classpath*:com.duyi.hrb.dao/*Mapper.xml"></property>
-    </bean>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:com.duyi.hrb.dao/UserMapper.xml</value>
+            </list>
+        </property>
 
+    </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--指定会话工厂，如果当前上下文中只定义了一个则该属性可省去 -->
@@ -44,5 +48,6 @@
         <!-- 指定要自动扫描接口的基础包，实现接口 -->
         <property name="basePackage" value="com.duyi.hrb.dao"></property>
     </bean>
+
 
 </beans>
